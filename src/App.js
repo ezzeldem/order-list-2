@@ -1,25 +1,73 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import "./styles.css";
 
-function App() {
+function ReorderableItems() {
+  const data = [
+    {
+      id: 1,
+      order: 5,
+    },
+    {
+      id: 2,
+      order: 3,
+    },
+  ];
+
+  const [list, setList] = useState(data);
+
+  function reorderNumbers(result) {
+    const startIndex = result?.source?.index;
+    const endIndex = result?.destination?.index;
+
+    setList((lists) => {
+      const nums = [...lists];
+      const [removed] = nums?.splice(startIndex, 1);
+      nums.splice(endIndex, 0, removed);
+      return nums;
+    });
+  }
+
+  console.log({ list });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DragDropContext onDragEnd={reorderNumbers}>
+      <Droppable droppableId='droppable'>
+        {(provided) => (
+          <div {...provided.droppableProps} ref={provided.innerRef}>
+            {list.map((num, i) => {
+              return (
+                <Draggable
+                  key={num.id}
+                  draggableId={num.id.toString()}
+                  index={i}
+                >
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      variant={snapshot.isDragging ? "elevation" : "outlined"}
+                      elevation={4}
+                    >
+                      {num.order}
+                    </div>
+                  )}
+                </Draggable>
+              );
+            })}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <div className='App'>
+      <ReorderableItems />
+    </div>
+  );
+}
