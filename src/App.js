@@ -7,18 +7,18 @@ function ReorderableItems() {
     {
       id: 1,
       order: 5,
-      text: "JavaScript",
+      text: "JavaScript"
     },
     {
       id: 2,
       order: 3,
-      text: "Python",
+      text: "Python"
     },
     {
       id: 3,
       order: 6,
-      text: "Typescript",
-    },
+      text: "Typescript"
+    }
   ];
 
   const listAscending = [...data].sort((a, b) => a.order - b.order);
@@ -59,7 +59,7 @@ function ReorderableItems() {
                       variant={snapshot.isDragging ? "elevation" : "outlined"}
                       elevation={4}
                     >
-                      <p>{num.text}</p>
+                      {num.text}
                     </div>
                   )}
                 </Draggable>
