@@ -7,14 +7,23 @@ function ReorderableItems() {
     {
       id: 1,
       order: 5,
+      text: "JavaScript",
     },
     {
       id: 2,
       order: 3,
+      text: "Python",
+    },
+    {
+      id: 3,
+      order: 6,
+      text: "Typescript",
     },
   ];
 
-  const [list, setList] = useState(data);
+  const listAscending = [...data].sort((a, b) => a.order - b.order);
+
+  const [list, setList] = useState(listAscending);
 
   function reorderNumbers(result) {
     const startIndex = result?.source?.index;
@@ -32,7 +41,7 @@ function ReorderableItems() {
 
   return (
     <DragDropContext onDragEnd={reorderNumbers}>
-      <Droppable droppableId='droppable'>
+      <Droppable droppableId="droppable">
         {(provided) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
             {list.map((num, i) => {
@@ -50,7 +59,7 @@ function ReorderableItems() {
                       variant={snapshot.isDragging ? "elevation" : "outlined"}
                       elevation={4}
                     >
-                      {num.order}
+                      <p>{num.text}</p>
                     </div>
                   )}
                 </Draggable>
@@ -66,7 +75,7 @@ function ReorderableItems() {
 
 export default function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <ReorderableItems />
     </div>
   );
