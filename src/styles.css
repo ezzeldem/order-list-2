@@ -3,6 +3,25 @@
   text-align: center;
 }
 
-p {
-  margin: 10px
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+.container {
+  width: 20%;
+  margin: 0 auto;
+  background-color: #ebecf0;
+  padding: 10px;
+  border-radius: 4px;
+}
+.list-item {
+  border-radius: inherit;
+  margin-bottom: 12px;
+  padding: 40px;
+  margin-inline: auto;
+  border: 1px solid rgba(119, 119, 119, 0.212);
+  background-color: #fff;
 }
