@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { data } from "./data.js";
-import "./styles.css";
+import "./style.css";
 
 function ReorderableItems() {
   const listAscending = [...data].sort((a, b) => a.order - b.order);
